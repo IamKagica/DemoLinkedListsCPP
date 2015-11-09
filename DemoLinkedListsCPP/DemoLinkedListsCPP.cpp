@@ -29,10 +29,43 @@ void insertCar(int position_in_train, trainCar *start,std::string name) {
 }
 
 void deleteCar(int position_in_train,trainCar *start) {
-	
-}
-int countCars(trainCar *start) {
+	trainCar *position = start;
+	trainCar *secondPosition = start;
+	trainCar *deletedCar;
+	int car_number = 0;
+	int car_number2 = 0;
 
+	while (car_number < position_in_train)
+	{
+		position = position->next;
+		car_number++;
+	}
+
+	while (car_number2 <= position_in_train )
+	{
+		secondPosition = secondPosition->next;
+		car_number2++;
+	}
+
+	deletedCar = position->next;
+	position->next = secondPosition->next;
+	delete deletedCar;
+
+}
+
+int countCars(trainCar *start) {
+	int number = 0;
+	trainCar *position = start;
+	if (position != 0)
+	{
+		number = 1;
+		while (position->next != 0)
+		{
+			position = position->next;
+			number++;
+		}
+	}
+	return number;
 }
 
 void printCars(trainCar *start) {
@@ -80,20 +113,21 @@ int main()
 			position->name = "Caboose";
 		}
 	}
-	
+	std::cout << countCars(root) << std::endl;
 
 	
 
 	// Let's insert a new car
-	insertCar(5, root, "Dining Car");
+/*	insertCar(5, root, "Dining Car");
 	insertCar(2, root, "luggage car");
 	insertCar(12, root, "New Caboose 1");
 	insertCar(13, root, "New Caboose 2");
-
+*/	deleteCar(4, root);
 
 
 	position = root;
 	printCars(root);
+	std::cout << countCars(root) << std::endl;
 	
 
 	system("Pause");
