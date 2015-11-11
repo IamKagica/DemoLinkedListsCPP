@@ -1,5 +1,7 @@
-// DemoLinkedListsCPP.cpp : Defines the entry point for the console application.
-//
+// Author: Phillip Sin
+// Date: 11/11/15
+// Class: CP2 C++ (A2)
+// DemoLinkedListsCPP.cpp
 
 #include "stdafx.h"
 #include <iostream>
@@ -35,13 +37,18 @@ void deleteCar(int position_in_train,trainCar *start) {
 	int car_number = 0;
 	int car_number2 = 0;
 
-	while (car_number < position_in_train)
+	//Must Subtract 1 to point to the position we
+	//don't want because position points
+	//to the car thereafter. 1->2->3->4 
+	//We start at Car Number 1 (Engine)
+	
+	while (car_number < position_in_train - 2)
 	{
 		position = position->next;
 		car_number++;
 	}
 
-	while (car_number2 <= position_in_train )
+	while (car_number2 < position_in_train - 1)
 	{
 		secondPosition = secondPosition->next;
 		car_number2++;
@@ -50,6 +57,9 @@ void deleteCar(int position_in_train,trainCar *start) {
 	deletedCar = position->next;
 	position->next = secondPosition->next;
 	delete deletedCar;
+	//deletedCar = position;
+	//position = secondPosition;
+	//delete deletedCar;
 
 }
 
@@ -118,16 +128,18 @@ int main()
 	
 
 	// Let's insert a new car
-/*	insertCar(5, root, "Dining Car");
+	insertCar(5, root, "Dining Car");
 	insertCar(2, root, "luggage car");
 	insertCar(12, root, "New Caboose 1");
 	insertCar(13, root, "New Caboose 2");
-*/	deleteCar(4, root);
+	deleteCar(2, root);
+	deleteCar(9, root);
 
 
 	position = root;
 	printCars(root);
 	std::cout << countCars(root) << std::endl;
+	
 	
 
 	system("Pause");
